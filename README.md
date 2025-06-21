@@ -42,6 +42,11 @@ Async_Await
 
 ![image](https://github.com/user-attachments/assets/a3523a86-705f-48e3-a021-a3028774b2f4)
 
+Error Handling with Async Await
+
+![image](https://github.com/user-attachments/assets/c5990ba4-1695-4285-a47b-15dc2e3af2e2)
+
+
 
 
 
