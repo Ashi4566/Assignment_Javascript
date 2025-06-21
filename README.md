@@ -14,5 +14,16 @@ ForIn & ForOff Difference
 
 ![image](https://github.com/user-attachments/assets/1d72aa2d-ba14-49d1-a42d-31c0e9c368e0)
 
+DOM Manipulation
+
+Input Image
+
+![Screenshot 2025-06-12 152358](https://github.com/user-attachments/assets/920f7ab5-849e-4b60-95dc-5793efcc6844)
+
+Output Image
+
+![image](https://github.com/user-attachments/assets/3d40edca-d945-43af-b401-678ac4c9391b)
+
+
 
 
