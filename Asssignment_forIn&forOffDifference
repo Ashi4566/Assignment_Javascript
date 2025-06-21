@@ -1,0 +1,76 @@
+=====================================Question==================================================
+Topic: JavaScript Loops: for...in vs. for...of
+Your task is to demonstrate the difference between the for...in and for...of loops in JavaScript. 
+You will do this by applying them to two different data structures as outlined below: an array of objects and a string.
+Scenario 1: Array of Objects
+You are given an array of user objects. Each object has a name and an age property.
+
+Data:
+
+const users = [
+  { name: 'Alice', age: 30 },
+  { name: 'Bob', age: 25 },
+  { name: 'Charlie', age: 35 }
+];
+
+
+Task:
+Use a for...of loop to iterate through the users array. This loop should give you access to each user object one by one.
+Inside the for...of loop, use a for...in loop to iterate through the properties of the current user object. 
+This loop will give you access to the keys ('name', 'age').
+Print the key and its corresponding value for each property of each user.
+Scenario 2: String Iteration
+You are given a simple string.
+
+Data:
+
+const myString = "Hello";
+
+JavaScript
+Task:
+Use a for...of loop to iterate over myString and print each individual character (value).
+Use a for...in loop to iterate over myString and print each index (key).
+
+=======================================Solution======================================================
+
+// --- Scenario 1: Array of Objects ---
+console.log("--- Iterating over an Array of Objects ---");
+
+const users = [
+  { name: 'Alice', age: 30 },
+  { name: 'Bob', age: 25 },
+  { name: 'Charlie', age: 35 }
+];
+
+// Use 'for...of' to get each object from the array
+for (const user of users) {
+  console.log(`\nProcessing user: ${user.name}`);
+  
+  // Use 'for...in' to get each key ('name', 'age') from the object
+  for (const key in user) {
+    // 'key' will be "name", then "age"
+    // 'user[key]' gets the value associated with that key
+    console.log(`  ${key}: ${user[key]}`);
+  }
+}
+
+
+
+// --- Scenario 2: String Iteration ---
+console.log("\n\n--- Iterating over a String ---");
+
+const myString = "Hello";
+
+// Use 'for...of' to get each character (the VALUE)
+console.log("\nUsing for...of (gets characters):");
+for (const char of myString) {
+  console.log(char);
+}
+
+// Use 'for...in' to get each index (the KEY)
+console.log("\nUsing for...in (gets indices):");
+for (const index in myString) {
+  console.log(index);
+}
+
+
