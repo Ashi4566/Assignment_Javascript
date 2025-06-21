@@ -1,0 +1,139 @@
+======================================================Question==================================================
+Follow the Diagram
+Translate the following five sections from the diagram into JavaScript code.
+1. The Main Heading (<h1>)
+Visualize: Look at the top of the diagram where an arrow points from the "Food Blog" title.
+Diagram's Instruction: The red box says to use an ID selector to change the color from red to blue.
+2. The Section Titles (<h3>)
+Visualize: Find the "About Blogger" heading. The diagram points to it as an <h3>.
+Diagram's Instruction: The red box specifies changing the color from green to red and updating the font-family.
+3. The Blogger's Paragraph (<p>)
+Visualize: Locate the box labeled <p> with 3 lines under "About Blogger".
+Diagram's Instruction: The red box gives a two-part command:
+Use querySelectorAll to change the entire paragraph's color from crimson to blue.
+Then, specifically target the first line to change its color from pink (or the new blue) to violet.
+4. The Food Varieties List (<li>)
+Visualize: Focus on the bulleted list under "Food Varieties". The diagram groups these <li> items.
+Diagram's Instruction: The red box says to use querySelector (or querySelectorAll for all items) to change the font-size from 10px to 13px and the color from green to orange.
+5. The Menu Descriptions (<p> in #menu)
+Visualize: Look at the four paragraphs at the bottom of the page, inside the <div id="menu">.
+Diagram's Instruction: The final red box details a conditional rule:
+Use getElementsByClassName to select these paragraphs.
+Change the color of all of them to red.
+Then, for the 2nd and 4th paragraphs only, change their color to grey and their font-size to 15px.
+
+
+===========================================Solution============================================================
+
+HTML Code========================================================
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Food Blog</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 id="mainHeading">Food Blog</h1>
+
+    <h3>About Blogger</h3>
+    <p class="bloggerPara">
+        Line 1<br>
+        Line 2<br>
+        Line 3
+    </p>
+
+    <div id="food">
+        <h3>Food Varieties</h3>
+        <ul>
+            <li>Indian</li>
+            <li>Italian</li>
+            <li>Chinese</li>
+            <li>South Indian</li>
+        </ul>
+    </div>
+
+    <div id="menu">
+        <div>
+            <h4>Indian Food</h4>
+            <p class="menuPara">Chawal, Dal, Dalmakhni</p>
+        </div>
+        <div>
+            <h4>Italian</h4>
+            <p class="menuPara">Sussi, Pasta, Pizza</p>
+        </div>
+        <div>
+            <h4>Chinese</h4>
+            <p class="menuPara">Snake,Octopus,Human</p>
+        </div>
+        <div>
+            <h4>South Indian</h4>
+            <p class="menuPara">Dosa,Idli,Uttpam</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+CSS Code========================================================================
+
+body { font-family: sans-serif; }
+h1 { color: red; }
+h3 { color: green; font-family: 'Times New Roman', serif; }
+.bloggerPara { color: crimson; }
+#food li { font-size: 10px; color: green; }
+
+JavaScript Code=====================================================================
+
+// Task 1: The Main Heading (h1)
+// Following the diagram's instruction for the h1 element.
+document.getElementById("mainHeading").style.color = "blue";
+
+
+// Task 2: The Section Titles (h3)
+// Following the diagram's instruction for the h3 elements.
+let h3Headings = document.querySelectorAll("h3");
+h3Headings.forEach(h3 => {
+    h3.style.color = "red";
+    h3.style.fontFamily = "Arial";
+});
+
+
+// Task 3: The Blogger's Paragraph (p)
+// Following the diagram's instructions for the 3-line paragraph.
+let paraLines = document.querySelectorAll(".bloggerPara");
+paraLines.forEach(p => {
+    // First, change all text to blue
+    p.style.color = "blue"; 
+    // Then, specifically change the first line to violet by wrapping it in a span
+    let firstLine = document.querySelector(".bloggerPara");
+    firstLine.innerHTML = '<span style="color:violet">Line 1</span><br>Line 2<br>Line 3';
+});
+
+
+// Task 4: The Food Varieties List (li)
+// Following the diagram's instructions for the list items.
+let foodItems = document.querySelectorAll("#food li");
+foodItems.forEach(li => {
+    li.style.fontSize = "13px";
+    li.style.color = "orange";
+});
+
+
+// Task 5: The Menu Descriptions (p in #menu)
+// Following the diagram's conditional styling rules for the menu paragraphs.
+let menuParas = document.getElementsByClassName("menuPara");
+
+for (let i = 0; i < menuParas.length; i++) {
+    // First, set all paragraphs to red
+    menuParas[i].style.color = "red";
+
+    // Then, apply specific styles to the 2nd (index 1) and 4th (index 3) paragraphs
+    if (i === 1 || i === 3) {
+        menuParas[i].style.color = "grey";
+        menuParas[i].style.fontSize = "15px";
+    }
+}
+
+
