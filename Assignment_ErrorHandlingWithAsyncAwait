@@ -1,0 +1,127 @@
+=================================================Question===========================================================================
+Topic: Advanced async/await with Error Handling (try...catch)
+You are building a simulation of an e-commerce user journey based on the provided visual flowchart. 
+The flow includes multiple steps, each of which can either succeed (resolve) and proceed to the next step, or fail (reject) and trigger an error-handling path.
+Your task is to implement this entire flow using async/await and handle potential failures gracefully with try...catch.
+Implement the following functions, which should each return a Promise:
+loginUser(email, password):
+Resolves: If the email is 'user@example.com' and password is 'password123', resolve with a user info object like { email: 'user@example.com', name: 'Alice' }.
+Rejects: For any other credentials, reject with the error message "Invalid credentials". This corresponds to the Login -> Reset path.
+goToDashboard(userInfo):
+Resolves: This step always succeeds. 
+It takes user info and resolves with some dummy cart data, like { items: ['Laptop', 'Mouse'], total: 1250 }. This corresponds to the Dashboard -> Cart path.
+goToCart(cartData):
+Resolves: To simulate potential issues, this step should succeed 80% of the time. 
+If it succeeds, resolve with payment details like { cardType: 'Visa', cartTotal: cartData.total }. This is the Cart -> Payment path.
+Rejects: It should fail 20% of the time, rejecting with the error "Error checking out cart. Please try again."
+This corresponds to the Cart -> reject (make cart empty) path, which should send the user back.
+makePayment(paymentDetails):
+Resolves: This step should also succeed 80% of the time. If successful, resolve with a fake Order ID (e.g., a random number). 
+This is the final success state.
+Rejects: It should fail 20% of the time, rejecting with the error "Payment failed." This corresponds to the Payment -> reject path.
+Create a Master async Function:
+Finally, create a main async function called startUserJourney(email, password) that orchestrates the entire flow. This function must:
+Use a try...catch block to manage the sequence.
+await each step in the correct order inside the try block.
+Log success messages at each stage.
+If any step rejects, the catch block should catch the error, log it, and gracefully end the journey.
+Test the entire flow for both a successful login and a failed login to see both the try and catch paths in action.
+
+=======================================================Solution================================================================================
+
+// --- Promise-based "API" Functions ---
+
+// 1. Login Function
+function loginUser(email, password) {
+  console.log("Attempting to log in...");
+  return new Promise((resolve, reject) => {
+    setTimeout(() => { // Simulate network delay
+      if (email === 'user@example.com' && password === 'password123') {
+        resolve({ email, name: 'Alice', message: "Login successful! Welcome, Alice." });
+      } else {
+        reject("Invalid credentials. Please try again.");
+      }
+    }, 1000);
+  });
+}
+
+// 2. Dashboard Function
+function goToDashboard(userInfo) {
+  console.log("Navigating to dashboard...");
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({ items: ['Laptop', 'Mouse'], total: 1250 });
+    }, 500);
+  });
+}
+
+// 3. Cart Function (can fail)
+function goToCart(cartData) {
+  console.log("Checking out cart with items:", cartData.items);
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (Math.random() > 0.2) { // 80% chance of success
+        resolve({ cardType: 'Visa', cartTotal: cartData.total });
+      } else {
+        reject("Error: Cart validation failed. Your cart has been emptied.");
+      }
+    }, 1000);
+  });
+}
+
+// 4. Payment Function (can fail)
+function makePayment(paymentDetails) {
+  console.log(`Processing payment of $${paymentDetails.cartTotal}...`);
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (Math.random() > 0.2) { // 80% chance of success
+        const orderID = Math.floor(Math.random() * 900000) + 100000;
+        resolve(orderID);
+      } else {
+        reject("Error: Payment failed. Please try again later.");
+      }
+    }, 1500);
+  });
+}
+
+
+// --- Master async/await Orchestrator ---
+
+async function startUserJourney(email, password) {
+  try {
+    // Await each step in the 'happy path'
+    const userInfo = await loginUser(email, password);
+    console.log(userInfo.message);
+
+    const cartData = await goToDashboard(userInfo);
+    console.log("Navigated to dashboard, proceeding to cart...");
+
+    const paymentDetails = await goToCart(cartData);
+    console.log("Cart verified, proceeding to payment...");
+
+    const orderID = await makePayment(paymentDetails);
+    console.log(`✅ Order successful! Your Order ID is: ${orderID}`);
+
+  } catch (error) {
+    // If ANY of the awaited promises reject, the code jumps here.
+    console.error(`❌ Journey failed: ${error}`);
+    console.log("Please reset and try again.");
+  } finally {
+    // This block runs regardless of success or failure.
+    console.log("--- User journey finished. ---\n");
+  }
+}
+
+// --- Run Test Cases ---
+
+// Test Case 1: Successful journey (most of the time)
+console.log("--- Starting GOOD user journey ---");
+startUserJourney('user@example.com', 'password123');
+
+
+// Test Case 2: Failed login journey
+// We use a timeout to let the first journey finish logging before starting the next.
+setTimeout(() => {
+  console.log("--- Starting BAD user journey ---");
+  startUserJourney('wrong@email.com', 'badpassword');
+}, 8000); // Wait 8 seconds
