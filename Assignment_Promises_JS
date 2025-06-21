@@ -1,0 +1,65 @@
+============================================================Question========================================================================
+Topic: JavaScript Promises with .then(), .catch(), and .finally()
+Create a JavaScript Promise that validates a number according to a specific set of rules. 
+You will then consume this promise, handling its success, failure, and final cleanup states.
+Your Task:
+Create a function named checkNumber that accepts one argument, number, and returns a Promise.
+Inside the Promise, implement the following logic:
+If the number is positive (greater than or equal to 0):
+Check if the number is odd or even.
+In both cases (odd or even), resolve the promise with a descriptive success message (e.g., "The number is positive and even.").
+If the number is negative:
+Reject the promise with a descriptive error message (e.g., "The number is negative.").
+After creating the function, you must test it with the following numbers: -56, 45, and 22.
+For each test case, handle the promise's outcome:
+Use .then() to log the success message to the console if the promise is resolved.
+Use .catch() to log the error message to the console if the promise is rejected.
+Use .finally() to always print the string 'Bye' to the console, regardless of whether the promise was resolved or rejected.
+
+======================================================================Answer====================================================================
+
+/**
+ * Creates a Promise that checks if a number is positive or negative.
+ * Resolves for positive numbers (stating if odd or even).
+ * Rejects for negative numbers.
+ * @param {number} number The number to check.
+ * @returns {Promise<string>} A promise that resolves or rejects with a message.
+ */
+function checkNumber(number) {
+  return new Promise((resolve, reject) => {
+    if (number >= 0) {
+      // If the number is positive, check if it's odd or even.
+      if (number % 2 === 0) {
+        // If even, resolve the promise.
+        resolve(`Success: The number ${number} is positive and even.`);
+      } else {
+        // If odd, resolve the promise.
+        resolve(`Success: The number ${number} is positive and odd.`);
+      }
+    } else {
+      // If the number is negative, reject the promise.
+      reject(`Error: The number ${number} is negative.`);
+    }
+  });
+}
+
+// Array of numbers to test
+const testCases = [-56, 45, 22];
+
+// Loop through each test case and handle the promise
+testCases.forEach(num => {
+  console.log(`--- Testing for number: ${num} ---`);
+  checkNumber(num)
+    .then(successMessage => {
+      // This block runs if the promise is resolved
+      console.log(successMessage);
+    })
+    .catch(errorMessage => {
+      // This block runs if the promise is rejected
+      console.log(errorMessage);
+    })
+    .finally(() => {
+      // This block runs every time, after then() or catch()
+      console.log('Bye');
+    });
+});
