@@ -1,0 +1,68 @@
+============================================Question=======================================================================
+Topic: JavaScript Asynchronous Programming with async/await
+You are tasked with simulating an e-commerce shopping flow using JavaScript's async/await syntax. 
+The provided diagram illustrates this flow, where each step must wait for the previous one to complete before starting.
+Task:
+Translate the visual logic from the diagram into three functions that work together to simulate a user's journey from the product page to the payment page.
+function1 (Select Product):
+This function represents the user selecting a product.
+It should simulate a network delay of 5 seconds using setTimeout. The diagram specifies 5000ms.
+This function must return a Promise that resolves after the delay with a success message, like "Product selected successfully!".
+function2 (Add to Cart):
+This function represents adding the selected product to the shopping cart.
+It must be an async function.
+It can only run after a product has been selected. Therefore, it must await the result of function1.
+Once function1 completes, it should log the success message from it and then return its own success message, like "Product added to cart.".
+function3 (Make Payment):
+This function represents the final payment step.
+It must be an async function.
+It can only run after the item has been successfully added to the cart. Therefore, it must await the result of function2.
+Once function2 completes, it should log the success message from it and then log a final confirmation, like "Payment successful!".
+Finally, create a main async function to start the entire shopping sequence by calling function3.
+
+==========================================Solution===============================================================================
+
+// Function 1: Simulate selecting a product (takes 5 seconds).
+function selectProduct() {
+  console.log("User is on the product page, selecting an item...");
+  return new Promise(resolve => {
+    // Simulate a 5-second network delay as per the diagram.
+    setTimeout(() => {
+      resolve("Product selected successfully!");
+    }, 5000);
+  });
+}
+
+// Function 2: Simulate adding the item to the cart.
+// This is an async function because it must 'await' for the product selection.
+async function addToCart() {
+  console.log("Navigating to cart page...");
+  // 'await' pauses the function until selectProduct() promise is resolved.
+  const productStatus = await selectProduct();
+  
+  // This line will only run after the 5-second delay from selectProduct().
+  console.log(productStatus); 
+  return "Product added to cart.";
+}
+
+// Function 3: Simulate making the payment.
+// This is an async function because it must 'await' for the cart operation.
+async function makePayment() {
+  console.log("Proceeding to payment page...");
+  // 'await' pauses the function until addToCart() has completed.
+  const cartStatus = await addToCart();
+  
+  // This line will only run after addToCart() is done.
+  console.log(cartStatus);
+  console.log("Payment successful! Thank you for your purchase.");
+}
+
+// Create a main async function to start the entire process.
+async function startShopping() {
+  console.log("--- Starting Shopping Journey ---");
+  await makePayment();
+  console.log("--- Shopping Journey Complete ---");
+}
+
+// Kick off the entire sequence.
+startShopping();
