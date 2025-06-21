@@ -1,0 +1,77 @@
+=========================Question========================================================
+
+Topic: JavaScript Array Manipulation and Spread Syntax
+You are given a set of instructions to manipulate arrays in JavaScript. Your task is to write the code that performs these operations and prints the final results.
+Part A: Array Modification
+Follow these steps sequentially to modify an array named cities.
+Create an array named cities and initialize it with three city names of your choice.
+Add two more cities to the end of the array.
+Print the current length of the array and all its elements.
+Add the string "Delhi" as the first element of the array.
+Add the string "Chennai" as the second element of the array.
+Add the string "Kolkata" as the last element of the array.
+Remove the last element from the array two times (i.e., perform a pop operation twice).
+Print the final length of the array and all its elements.
+Part B: Combining Arrays with the Spread Operator
+Given the following arrays:
+Generated code
+arr1 = ["Hello", "World"]
+arr2 = [1, 3, 9, 5, 4, 9, 6]
+arr4 = ['a', 'j', 't', 'r', 'f']
+Use code with caution.
+Create a new array named arr3 by combining arr1 and arr2 using the spread operator. arr1's elements should come first.
+Create a new array named arr5 by combining arr3 and arr4 using the spread operator. arr3's elements should come first.
+Print the final arr3 and arr5 to the console.
+
+===========================Solution==========================================================
+// --- Part A: Array Modification ---
+console.log("--- Part A Results ---");
+
+// 1. Create an array with 3 cities
+let cities = ["Mumbai", "Bengaluru", "Pune"];
+
+// 2. Add two more cities at the end
+cities.push("Hyderabad", "Ahmedabad");
+
+// 3. Print the length and all elements
+console.log("Length after adding two cities:", cities.length);
+console.log("Array:", cities);
+// Expected output: Length: 5, Array: [ 'Mumbai', 'Bengaluru', 'Pune', 'Hyderabad', 'Ahmedabad' ]
+
+// 4. Add "Delhi" as the first element
+cities.unshift("Delhi");
+
+// 5. Add "Chennai" as the second element
+cities.splice(1, 0, "Chennai");
+
+// 6. Add "Kolkata" as the last element
+cities.push("Kolkata");
+
+// 7. Do pop two times
+cities.pop();
+cities.pop();
+
+// 8. Print the final length and all elements
+console.log("\nFinal Length:", cities.length);
+console.log("Final Array:", cities);
+// Expected output: Final Length: 6, Final Array: [ 'Delhi', 'Chennai', 'Mumbai', 'Bengaluru', 'Pune', 'Hyderabad' ]
+
+
+// --- Part B: Combining Arrays with the Spread Operator ---
+console.log("\n--- Part B Results ---");
+
+const arr1 = ["Hello", "World"];
+const arr2 = [1, 3, 9, 5, 4, 9, 6];
+const arr4 = ['a', 'j', 't', 'r', 'f'];
+
+// 1. Create arr3 by combining arr1 and arr2
+const arr3 = [...arr1, ...arr2];
+
+// 2. Create arr5 by combining arr3 and arr4
+const arr5 = [...arr3, ...arr4];
+
+// 3. Print the final arrays
+console.log("arr3:", arr3);
+console.log("arr5:", arr5);
+// Expected output for arr3: [ 'Hello', 'World', 1, 3, 9, 5, 4, 9, 6 ]
+// Expected output for arr5: [ 'Hello', 'World', 1, 3, 9, 5, 4, 9, 6, 'a', 'j', 't', 'r', 'f' ]
