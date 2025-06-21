@@ -1,0 +1,54 @@
+========================Question===========================================
+Topic: JavaScript String Manipulation and Regular Expressions
+You are given a string containing information about programming languages. 
+Your task is to perform a series of find-and-replace operations on this string using JavaScript. 
+For some tasks, you will need to use regular expressions to handle case-insensitivity and multiple matches.
+Initial String:
+"Java Is open source language and Javascript is scripting language. java Is very user-friendly and easy to use"
+Your Tasks:
+Write a JavaScript script that performs the following four operations on the initial string. 
+Print the result of each operation to the console.
+Replace only the first occurrence of the word "Java" with "Python".
+Replace all words that start with "java" (case-insensitive, e.g., "Java", "Javascript", "java") with the word "python".
+Replace all occurrences of the whole word "Java" (case-insensitive, e.g., "Java", "java" but not "Javascript") with "Hello".
+Replace all occurrences of the word "is" (case-insensitive, e.g., "Is", "is") with "are".
+
+==========================Solution===============================================
+
+const originalString = "Java Is open source language and Javascript is scripting language. java Is very user-friendly and easy to use";
+console.log("Original String:\n", originalString);
+
+// 1. Replace only "Java" with "Python" on first search
+console.log("\n--- Task 1: Replace only the first 'Java' ---");
+// The default .replace() method with a string only replaces the first match.
+const result1 = originalString.replace("Java", "Python");
+console.log(result1);
+
+
+// 2. Replace all words starting with "java" with "python"
+console.log("\n--- Task 2: Replace all words starting with 'java' (case-insensitive) ---");
+// We use a regular expression:
+// \b     - matches a word boundary.
+// java   - the literal text to find at the start of a word.
+// \w*    - matches any word character (letters, numbers, _) zero or more times.
+// /g     - global flag (to replace all matches, not just the first).
+// /i     - case-insensitive flag.
+const result2 = originalString.replace(/\bjava\w*/gi, "python");
+console.log(result2);
+
+
+// 3. Replace all words of "Java" in complete string with "Hello"
+console.log("\n--- Task 3: Replace all whole words 'Java' (case-insensitive) ---");
+// The word boundaries (\b) at both ends ensure we only match the whole word "Java"
+// and not the "Java" part of "Javascript".
+const result3 = originalString.replace(/\bJava\b/gi, "Hello");
+console.log(result3);
+
+
+// 4. Replace case-insensitive "is" with "are" in complete string
+console.log("\n--- Task 4: Replace all 'is' with 'are' (case-insensitive) ---");
+// Again, we use word boundaries to avoid replacing "is" inside "Javascript".
+const result4 = originalString.replace(/\bis\b/gi, "are");
+console.log(result4);
+
+
