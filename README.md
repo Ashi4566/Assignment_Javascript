@@ -29,6 +29,11 @@ String Manipulation & Regex
 
 ![image](https://github.com/user-attachments/assets/e5e85f59-46aa-475a-9fe7-25c1f636f36c)
 
+Maps & Sync
+
+![image](https://github.com/user-attachments/assets/4dd211d6-0a07-458f-8006-0f6aa7b5b422)
+
+
 
 
 
