@@ -1,0 +1,77 @@
+==============================================================Question====================================================================
+Topic: JavaScript Array Iteration and Transformation
+An e-commerce platform, "Amazon," offers different levels of discounts to its users based on their membership type: Normal, Premium, and Golden. 
+You are given the shopping cart contents (as a list of prices) for one user of each type.
+User Data:
+Normal User:
+Discount: 5%
+Cart Prices: [200, 300, 250, 120, 400]
+Premium User:
+Discount: 15%
+Cart Prices: [100, 400, 550, 100, 400]
+Golden User:
+Discount: 20%
+Cart Prices: [300, 370, 350, 130, 450]
+Your Task:
+Write a JavaScript script that performs the following actions:
+Create three separate arrays to hold the cart prices for each user type (Normal, Premium, Golden).
+For each user's cart, calculate the new price of every item after applying their specific discount.
+Store these new, discounted prices in three new, separate arrays.
+Constraint: You must use the forEach() array method to perform the iteration and calculation for each cart.
+Finally, print the three new arrays containing the discounted prices to the console.
+
+=====================================================================Solution======================================================================
+
+// 1. Create three arrays for every user's cart products
+const normalUserCart = [200, 300, 250, 120, 400];
+const premiumUserCart = [100, 400, 550, 100, 400];
+const goldenUserCart = [300, 370, 350, 130, 450];
+
+// Define discount rates
+const normalDiscount = 0.05;   // 5%
+const premiumDiscount = 0.15;  // 15%
+const goldenDiscount = 0.20;   // 20%
+
+// Create new empty arrays to store the results
+let normalUserDiscountedPrices = [];
+let premiumUserDiscountedPrices = [];
+let goldenUserDiscountedPrices = [];
+
+// 2. Calculate discounted prices for the Normal User using forEach
+console.log("Processing Normal User Cart...");
+normalUserCart.forEach(price => {
+  // Calculate the price after a 5% discount
+  const discountedPrice = price * (1 - normalDiscount);
+  normalUserDiscountedPrices.push(discountedPrice);
+});
+
+// Calculate discounted prices for the Premium User using forEach
+console.log("Processing Premium User Cart...");
+premiumUserCart.forEach(price => {
+  // Calculate the price after a 15% discount
+  const discountedPrice = price * (1 - premiumDiscount);
+  premiumUserDiscountedPrices.push(discountedPrice);
+});
+
+// Calculate discounted prices for the Golden User using forEach
+console.log("Processing Golden User Cart...");
+goldenUserCart.forEach(price => {
+  // Calculate the price after a 20% discount
+  const discountedPrice = price * (1 - goldenDiscount);
+  goldenUserDiscountedPrices.push(discountedPrice);
+});
+
+
+// 3. Return (print) the new arrays with discounted prices
+console.log("\n--- Final Discounted Prices ---");
+console.log("Normal User's New Prices:", normalUserDiscountedPrices);
+console.log("Premium User's New Prices:", premiumUserDiscountedPrices);
+console.log("Golden User's New Prices:", goldenUserDiscountedPrices);
+
+/*
+Expected Output:
+--- Final Discounted Prices ---
+Normal User's New Prices: [ 190, 285, 237.5, 114, 380 ]
+Premium User's New Prices: [ 85, 340, 467.5, 85, 340 ]
+Golden User's New Prices: [ 240, 296, 280, 104, 360 ]
+*/
