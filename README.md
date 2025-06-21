@@ -34,6 +34,12 @@ Maps & Sync
 ![image](https://github.com/user-attachments/assets/4dd211d6-0a07-458f-8006-0f6aa7b5b422)
 
 
+Promises JavaScript
+
+![image](https://github.com/user-attachments/assets/66cfbcb6-edba-4ae8-804c-984a4673630b)
+
+
+
 
 
 
