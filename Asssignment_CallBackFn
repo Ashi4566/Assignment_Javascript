@@ -1,0 +1,63 @@
+============================================================Question===================================================
+Topic: JavaScript Asynchronous Callbacks (Callback Hell)
+You are tasked with creating a sequence of operations where each step triggers the next using a callback function. 
+This pattern is common in asynchronous programming.
+The required flow is as follows:
+area(length, width, callback) function:
+Takes a length, width, and a callback function as arguments.
+It should calculate the area of a rectangle (length * width).
+It should then wait for 3 seconds.
+After the 3-second delay, it must call the provided callback function, which will be the add function.
+add(num1, num2, callback) function:
+This function is called by area().
+It should calculate the sum of the two numbers it receives.
+Immediately after, it must call its provided callback function, which will be the multiply function.
+multiply(num1, num2) function:
+This function is called by add().
+It should calculate the product of the two numbers it receives.
+This is the final step in the chain.
+Instructions:
+Implement the three functions: area, add, and multiply.
+Each function should print a message to the console indicating what it's doing and its result (e.g., "Area of rectangle is: 200").
+Initiate the entire sequence by calling the area() function with the parameters 10 and 20.
+Ensure the add function is passed as the callback to area, and the multiply function is passed as the callback to add.
+
+========================================================Solution================================================================
+
+// 3. The final function in the chain: multiplies two numbers.
+function multiply(num1, num2) {
+  const product = num1 * num2;
+  console.log("Multiplying the two numbers...");
+  console.log(`Product of the numbers is: ${product}`);
+}
+
+// 2. The middle function: adds two numbers and calls the next function (multiply).
+function add(num1, num2, callback) {
+  const sum = num1 + num2;
+  console.log("Adding the two numbers...");
+  console.log(`Sum of the numbers is: ${sum}`);
+  
+  // Call the callback function (multiply) passed from the initial call.
+  callback(num1, num2);
+}
+
+// 1. The first function: calculates area and calls the 'add' function after a delay.
+function area(length, width, callback) {
+  const rectArea = length * width;
+  console.log("Calculating area of rectangle...");
+  console.log(`Area of rectangle is: ${rectArea}`);
+  
+  // Use setTimeout to create a 3-second delay.
+  setTimeout(() => {
+    console.log("\n...3 seconds have passed...\n");
+    // After the delay, call the callback (add), which in turn needs its own callback (multiply).
+    // This nested structure is often called "Callback Hell".
+    callback(length, width, multiply);
+  }, 3000);
+}
+
+// --- Start the sequence ---
+// Note: The two parameters for area() are 10 and 20.
+// 'add' is the callback for 'area'.
+console.log("Starting the operation chain...");
+area(10, 20, add);
