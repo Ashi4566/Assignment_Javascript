@@ -29,11 +29,12 @@ Then, use an async function with await to call this function and get the result.
 
 =====================================Solution============================================================================
 
-1. Data Structures: Maps
-Explanation: A JavaScript Map is a built-in data structure that holds key-value pairs, similar to an object. However, unlike plain objects where keys are implicitly converted to strings, a Map allows keys of any data type (including objects, functions, and primitives). It also maintains the insertion order of its elements and provides useful methods like .set(), .get(), .has(), and .delete(), and a .size property.
-Code Example:
+// --- 1. Data Structures: Maps ---
 
-// Create a new Map
+// Explanation: A JavaScript `Map` is a built-in data structure that holds key-value pairs.
+// It allows keys of any data type and maintains insertion order.
+
+// Code Example:
 const userRoles = new Map();
 
 // Add key-value pairs using .set(key, value)
@@ -41,42 +42,57 @@ userRoles.set('Alice', 'Admin');
 userRoles.set('Bob', 'Editor');
 
 // Retrieve a value using .get(key)
-console.log(`Bob's role is: ${userRoles.get('Bob')}`); // Output: Bob's role is: Editor
-console.log(`The map size is: ${userRoles.size}`);   // Output: The map size is: 2
+console.log("--- Section 1: Maps ---");
+console.log(`Bob's role is: ${userRoles.get('Bob')}`);
+console.log(`The map size is: ${userRoles.size}`);
 
-2. String Manipulation & Regular Expressions
+
+// --- 2. String Manipulation & Regular Expressions ---
+
+/*
 Explanation:
-String.prototype.replace(pattern, replacement): When used with a string as the pattern, this method finds and replaces only the first occurrence. To replace all occurrences, the pattern must be a regular expression with the global (g) flag.
-String.prototype.replaceAll(pattern, replacement): This method was introduced to simplify replacing all occurrences of a substring without needing a regular expression. It replaces every instance of the pattern.
+- `replace()`: Replaces only the first occurrence of a string, or all occurrences if used with a global /g regex.
+- `replaceAll()`: Replaces all occurrences of a string without needing a regex.
+
 Regex Flags:
-i: Case-Insensitive. It makes the pattern match both uppercase and lowercase letters.
-g: Global. It makes the pattern find all matches in the string, not just the first one.
-gi: This is a combination of both flags, meaning the search will be Global and Case-Insensitive.
-Code Example:
+- i: Case-Insensitive
+- g: Global (find all matches)
+- gi: Global and Case-Insensitive
+*/
 
+// Code Example:
 const sentence = "This is a test. Let's test again. TEST one more time.";
-
-// Use replace() with the /gi regex to replace all case-insensitive matches
 const updatedSentence = sentence.replace(/test/gi, "review");
 
+console.log("\n--- Section 2: String/Regex ---");
 console.log(updatedSentence);
-// Output: This is a review. Let's review again. review one more time.
 
-3. DOM Selectors
-getElementById(id): Selects a single element by its unique id. It is the fastest selector.
-getElementsByClassName(name): Selects all elements that have a given CSS class name. It returns a live HTMLCollection.
-getElementsByTagName(name): Selects all elements with the specified tag name (e.g., 'p', 'div'). It returns a live HTMLCollection.
-querySelector(selector): Selects the first element that matches a specified CSS selector (e.g., '#myId', '.myClass', 'div p'). It is very versatile.
-querySelectorAll(selector): Selects all elements that match a specified CSS selector. It returns a static NodeList.
 
-4. Asynchronous JavaScript
-setTimeout(): A web API that allows you to execute a function or a piece of code after a specified delay (in milliseconds). It is a fundamental tool for introducing delays and managing asynchronous tasks.
-Promise: A Promise is an object that represents the eventual completion (or failure) of an asynchronous operation and its resulting value. It exists in one of three states: pending, fulfilled (successful), or rejected (failed). It helps avoid "callback hell" by allowing you to chain asynchronous actions cleanly.
-async and await: These are keywords that provide "syntactic sugar" over Promises, making asynchronous code look and behave more like synchronous code.
-async: When placed before a function declaration, it makes the function implicitly return a Promise.
-await: Can only be used inside an async function. It pauses the execution of the async function until the Promise it is waiting on is settled (either fulfilled or rejected).
-Code Example:
+// --- 3. DOM Selectors ---
 
+/*
+Explanation: The following are methods to select HTML elements.
+They will not produce output in Node.js because there is no HTML document (DOM).
+- `getElementById(id)`: Selects a single element by its unique `id`.
+- `getElementsByClassName(name)`: Selects all elements with a given class.
+- `getElementsByTagName(name)`: Selects all elements with a given tag.
+- `querySelector(selector)`: Selects the first element matching a CSS selector.
+- `querySelectorAll(selector)`: Selects all elements matching a CSS selector.
+*/
+console.log("\n--- Section 3: DOM Selectors ---");
+console.log("DOM selector methods are for browser environments, not Node.js.");
+
+
+// --- 4. Asynchronous JavaScript ---
+
+/*
+Explanation:
+- `setTimeout()`: Executes a function after a specified delay.
+- `Promise`: An object representing the eventual result of an async operation.
+- `async/await`: Syntax to make asynchronous code look more synchronous.
+*/
+
+// Code Example:
 // 1. Create a function that returns a Promise
 function fetchData() {
   return new Promise(resolve => {
@@ -89,6 +105,7 @@ function fetchData() {
 
 // 2. Create an async function to consume the Promise
 async function processData() {
+  console.log("\n--- Section 4: Async/Await ---");
   console.log("Starting data fetch...");
   // Use 'await' to pause the function until fetchData's Promise resolves
   const data = await fetchData();
